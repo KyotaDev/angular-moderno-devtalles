@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CharacterListComponent } from "../../../components/dragonball/character-list/character-list.component";
 import type { Character } from '../../../interfaces/character.interface';
 import { CharacterAddComponent } from "../../../components/dragonball/character-add/character-add/character-add.component";
+import { DragonballService } from '../../../services/dragonball.service';
 
 @Component({
   selector: 'app-dragonball-super-page',
@@ -14,18 +15,11 @@ import { CharacterAddComponent } from "../../../components/dragonball/character-
 })
 export class DragonballSuperPageComponent {
 
-  characters = signal<Character[]>([
-    { id: 1, name: 'Goku', power: 9001},
-    { id: 2, name: 'Vegeta', power: 8000}
-  ]);
+  // /* Anteriormente, la dependencia se declaraba asi */
+  // constructor(
+  //   public dragonballService : DragonballService
+  // ){}
 
-  addCharacter(character : Character) {
-    this.characters.update(list => [...list, character]);
-  }
+  public dragonballService = inject(DragonballService);
 
-  // powerClasses = computed( () => {
-  //   return {
-  //     'text-danger' : true,
-  //   }
-  // });
 }
